@@ -1,6 +1,6 @@
-# Special Topics - Cloud Computing from an Engineering Perspective
+# Special Topics - Cloud Computing Architectures, Processes and Operations​
 
-In this repository, the content for the Special Topic "..." is maintained.
+In this repository, the content for the Special Topics lecture: "Cloud Computing Architectures, Processes and Operations​" is maintained.
 
 In this course, we will cover the journey from code to a scalable application running in the cloud. Therefore, we will learn how to build applications using continuous integration pipelines. After building, a state-of-the-art cloud technology to operate applications, namely Kubernetes, is explained. Then, ways to deploy applications into a Kubernetes environment are explored. Finally, we will learn how to operate an application in a production environment.
 
