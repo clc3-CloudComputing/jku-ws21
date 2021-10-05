@@ -25,7 +25,7 @@ In this exercise, you will set up a *Continuous Integration* (CI) workflow using
 
 1. Active GitHub Actions for your GitHub repository:
 
-![GitHub, GitHub Actions, DockerHub](./assets/gh_action_activation.png)
+![GitHub, GitHub Actions, DockerHub](./assets/gh_action_activate.png)
 
 1. Create file `CI.yml` in your repository and copy-paste content from the provided `CI.yml` file. 
 
