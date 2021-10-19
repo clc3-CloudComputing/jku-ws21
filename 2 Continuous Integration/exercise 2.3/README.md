@@ -30,14 +30,14 @@ In this exercise, you will scan your code with [SonarCloud](https://sonarcloud.i
 
     * Create a GitHub Secret
 
-    * Create or update a `.github/workflows/build.yml` file on `master` branch:
+    * Create or update a `.github/workflows/build.yml` file on `main` branch:
 
     ```yaml
     name: Build
     on:
     push:
         branches:
-        - master
+        - main
     pull_request:
         types: [opened, synchronize, reopened]
     jobs:
@@ -55,7 +55,7 @@ In this exercise, you will scan your code with [SonarCloud](https://sonarcloud.i
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     ```
 
-    * Create a `sonar-project.properties` file on `master` branch:
+    * Create a `sonar-project.properties` file on `main` branch:
     
     ```
     sonar.projectKey=******_mini-ci-example
@@ -76,7 +76,7 @@ In this exercise, you will scan your code with [SonarCloud](https://sonarcloud.i
 
 1. On the `feature` branch make a code change and commit this change. 
 
-1. File a Pull Request (PR) that integrates the code change from the `feature` branch into the `master` branch. 
+1. File a Pull Request (PR) that integrates the code change from the `feature` branch into the `main` branch. 
 
 1. Watch the GitHub Action triggering SonarCloud to scan your code. 
 

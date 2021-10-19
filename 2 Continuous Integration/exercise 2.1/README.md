@@ -25,7 +25,7 @@ In this exercise, you will set up a *Continuous Integration* (CI) workflow using
 
 1. Active GitHub Actions for your GitHub repository:
 
-![GitHub, GitHub Actions, DockerHub](./assets/gh_action_activate.png)
+![GitHub Action activation](./assets/gh_action_activate.png)
 
 1. Create file `CI.yml` in your repository and copy-paste content from the provided `CI.yml` file. 
 
@@ -66,7 +66,7 @@ In this exercise, you will set up a *Continuous Integration* (CI) workflow using
             CGO_ENABLED=0 GOARCH=amd64 go build -o demo
     ```
 
-1. Trigger the GitHub Action sbuild by a code change, e.g., change "Hello" to "Hi there" in the file `./main.go`
+1. Trigger the GitHub Action build by a code change, e.g., change "Hello" to "Hi there" in the file `./main.go`
 
 1. Watch GitHub Action executing your tests and building the artifact.
 

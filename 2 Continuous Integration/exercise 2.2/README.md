@@ -15,7 +15,7 @@ In this exercise, you will integrate DockerHub into the CI workflow in order to 
 
 * Exercise 2.1 completed
 
-## Instructions
+## Instructions - !IN WORK!
 
 1. Setup credentials for DockerHub in Travis CI:
 
