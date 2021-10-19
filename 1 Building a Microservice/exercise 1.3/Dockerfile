@@ -1,4 +1,4 @@
-FROM golang:1.11-alpine
+FROM golang:1.13-alpine
 
 # Set /src as working directory
 WORKDIR /src
