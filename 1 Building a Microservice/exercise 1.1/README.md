@@ -31,7 +31,7 @@ In this exercise, you will write a Dockerfile and you will build an im
     * Set author label: `author='<YOUR-EMAIL'>`
     * Set working directory: `/opt`
     * Copy local file `main.go` to the image folder `/opt/`
-    * List items in the working directory (`ls -lsa`) and show content of the `main.go`file (cat)
+    * List items in the working directory (`ls -lsa`) and show content of the `main.go` file (cat)
     * Build the app (`CGO_ENABLED=0 go build -o /usr/myapp`) and show the /usr directory  (`ls -lsa`)
 
 1. Build a Docker image based on the Dockerfile:
@@ -40,7 +40,7 @@ In this exercise, you will write a Dockerfile and you will build an im
     ```console
     docker image build -f Dockerfile -t [YOUR-DOCKERHUB-ACCOUNT]/my-first-image:0.0.1 ./ 
     ```
-    *Note:* If your docker version is greater than 0.18, you are using Docker's new BuildKit engine that does not display the output from a `RUN` step. Therefore, add the option: `--progress=plain`
+    *Note:* If your Docker version is greater than 0.18, you are using Docker's new BuildKit engine that does not display the output from a `RUN` step. Therefore, add the option: `--progress=plain`
 
 1. Execute the command a second time: 
 

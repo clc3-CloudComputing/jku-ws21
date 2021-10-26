@@ -2,7 +2,7 @@
 FROM openjdk:8-jre-alpine                             
 
 # Add author label 
-LABEL author=johannes.braeuer@dynatrace.com
+LABEL author=johannes.br@dynatrace.com
 
 # Run make directory (mkdir) command
 RUN mkdir /opt/app                                    
