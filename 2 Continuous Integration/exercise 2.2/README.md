@@ -15,63 +15,78 @@ In this exercise, you will integrate DockerHub into the CI workflow in order to 
 
 * Exercise 2.1 completed
 
-## Instructions - !IN WORK!
+## Instructions
 
-1. Setup credentials for DockerHub in Travis CI:
+1. Setup credentials for DockerHub in GitHub:
 
-    1. Click on: `More options`
+    1. In your repository, go to: `Settings` > `Secrets`
 
-    1. Add an environment variable `REGISTRY_USER` with your DockerHub registry user name
+    1. Add the secret `DOCKERHUB_USERNAME` with your DockerHub registry user name
 
-    1. Add an environment variable `REGISTRY_PASSWORD` with your DockerHub registry password. :exclamation: **Important:**  Do not display value in build log.
+    1. Add the secret `DOCKERHUB_TOKEN` with your DockerHub registry password. 
 
 1. Add and commit the provided `Dockerfile` to your repository.
 
-1. Extend the `.travis.yaml` pipeline with the Docker service:
+1. Extend the `CI.yml` workflow with the following step. Note: This is *not required but recommended* using it to be able to build multi-platform images:
 
     ```yaml
-    services:
-    - docker
+    # Boot Docker builder using by default the docker-container
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
     ```
 
-1. Extend the `.travis.yaml` pipeline with a Docker `login` command in the `script` block:
+
+1. Extend the `CI.yml` workflow with a Docker `login` step:
 
     ```yaml
-    script:
-    - go test -v ./...
-    - CGO_ENABLED=0 go build -o demo
-
-    - echo "$REGISTRY_PASSWORD" | docker login --username $REGISTRY_USER --password-stdin
+    # Login to DockerHub account
+    - name: Login to DockerHub
+      uses: docker/login-action@v1 
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
     ```
     
-1. Extend the `.travis.yaml` pipeline with a Docker `build` command in the `script` block:
+1. Extend the `CI.yml` workflow with a Docker `build-push` step. Please change the [user] to your DockerHub account name: 
 
     ```yaml
-    script:
-    ...
-    - docker build -f Dockerfile -t YOUR-DOCKERHUB-ACCOUNT/demo:latest ./
+    # Build a Docker image based on provided Dockerfile
+    - name: Build and push
+      id: docker_build
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: [user]/app:latest
     ```
 
-1. Extend the `.travis.yaml` pipeline with a Docker `tag` command in the `script` block. The tag has to be the Git commit SHA of this build:
+1. Finally, trigger a build by a code change. 
 
-    ```yaml
-    script:
-    ...
-    - GIT_SHA="$(git rev-parse --short HEAD)"
-    - docker tag YOUR-DOCKERHUB-ACCOUNT/demo:latest YOUR-DOCKERHUB-ACCOUNT/demo:$GIT_SHA
-    ```
-
-1. Extend the `.travis.yaml` pipeline with a Docker `push` command in the `script` block:
-   
-    ```yaml
-    script:
-    ...
-    - docker push YOUR-DOCKERHUB-ACCOUNT/demo:latest
-    - docker push YOUR-DOCKERHUB-ACCOUNT/demo:$GIT_SHA
-    ```
-
-1. Finally, trigger a Travis CI build by a code change. 
-
-1. Watch Travis CI executing your tests, building the artifact, and pushing it to DockerHub.
+1. Watch GitHub Actions executing your tests, building the artifact, and pushing it to DockerHub.
 
 :mag: Go to your DockerHub account and find your image. Can you find it?
+
+
+### Use Git SHA instead of latest
+
+It is good practice to not use the version `latest` for an image tag. Instead, make it as specific a possible by using the Git commit SHA instead: 
+
+1. Extend the `CI.yml` workflow with a step that derives the short Git commit SHA and stores it in a variable: 
+
+    ```yaml
+    # Declare variables to store branch name and short Git commit SHA
+    - name: Declare variables
+      id: vars
+      shell: bash
+      run: |
+        echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/heads/})"
+        echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+    ```
+
+1. Change the `Build and push` step to reference the `sha_short` variable for the tag version: 
+
+    ```yaml
+        tags: [user]/app:${{ steps.vars.outputs.sha_short }}
+    ```
+
+1. Finally, trigger a build by a code change. 
