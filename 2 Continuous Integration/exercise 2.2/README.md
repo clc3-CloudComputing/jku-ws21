@@ -1,6 +1,6 @@
-# Exercise 2.2: Build and push a Container Image to DockerHub
+# Exercise 2.2: Build and push a Container Image to DockerHub
 
-In this exercise, you will integrate DockerHub into the CI workflow in order to push an image to your DockerHub account. Therefore, a Dockerfile needs to be added to the repository, and the steps to build, tag, and push an image need to be extended to the Travis pipeline. 
+In this exercise, you will integrate DockerHub into the CI workflow to push an image to your DockerHub account. Therefore, a Dockerfile needs to be added to the repository, and the steps to build, tag, and push an image need to be extended to the Travis pipeline. 
 
 ## Requirements
 

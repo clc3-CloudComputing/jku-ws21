@@ -26,36 +26,21 @@ In this exercise, you will scan your code with [SonarCloud](https://sonarcloud.i
 
     ![Configure SonarCloud repository](./assets/configure.png)
 
-1. Select: `Analyze with a GitHub Action` and follow the instructions.
+1. Select: `With GitHub Actions` and follow the instructions.
 
-    * Create a GitHub Secret
+    * Create a GitHub Secret, go to `Settings` > `Secret` and enter the provided value for the key `SONAR_TOKEN`.
 
-    * Create or update a `.github/workflows/build.yml` file on `main` branch:
+    * Instead of creating the file `.github/workflows/build.yml`, we extend the `CI.yaml` by adding the following step before *Run test and build*: 
 
     ```yaml
-    name: Build
-    on:
-    push:
-        branches:
-        - main
-    pull_request:
-        types: [opened, synchronize, reopened]
-    jobs:
-    sonarcloud:
-        name: SonarCloud
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v2
-            with:
-            fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-        - name: SonarCloud Scan
-            uses: SonarSource/sonarcloud-github-action@master
-            env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     ```
 
-    * Create a `sonar-project.properties` file on `main` branch:
+    * Create a `sonar-project.properties` file on `main`/`master` branch:
     
     ```
     sonar.projectKey=******_mini-ci-example
@@ -76,7 +61,7 @@ In this exercise, you will scan your code with [SonarCloud](https://sonarcloud.i
 
 1. On the `feature` branch make a code change and commit this change. 
 
-1. File a Pull Request (PR) that integrates the code change from the `feature` branch into the `main` branch. 
+1. File a Pull Request (PR) that integrates the code change from the `feature` branch into the `main`/`master` branch. 
 
 1. Watch the GitHub Action triggering SonarCloud to scan your code. 
 
