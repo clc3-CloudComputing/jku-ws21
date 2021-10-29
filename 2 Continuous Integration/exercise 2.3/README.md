@@ -33,7 +33,8 @@ In this exercise, you will scan your code with [SonarCloud](https://sonarcloud.i
     * Instead of creating the file `.github/workflows/build.yml`, we extend the `CI.yaml` by adding the following step before *Run test and build*: 
 
     ```yaml
-    - name: SonarCloud Scan
+    # Run SonarCloud scan
+    - name: SonarCloud scan
       uses: SonarSource/sonarcloud-github-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
