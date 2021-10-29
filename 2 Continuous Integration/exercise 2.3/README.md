@@ -35,7 +35,7 @@ In this exercise, you will scan your code with [SonarCloud](https://sonarcloud.i
     ```yaml
     # Run SonarCloud scan
     - name: SonarCloud scan
-      uses: SonarSource/sonarcloud-github-action@master
+      uses: SonarSource/sonarcloud-github-action@v1.6
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -74,7 +74,7 @@ In this exercise, you will scan your code with [SonarCloud](https://sonarcloud.i
 * *Optional*: You can change the analysis base directory by using the optional input `projectBaseDir` like this:
 
     ```yaml
-    uses: sonarsource/sonarcloud-github-action@master
+    uses: sonarsource/sonarcloud-github-action@v1.6
     with:
     projectBaseDir: my-custom-directory
     ```
@@ -83,7 +83,7 @@ In this exercise, you will scan your code with [SonarCloud](https://sonarcloud.i
 
     ```yaml
     - name: Analyze with SonarCloud
-      uses: sonarsource/sonarcloud-github-action@master
+      uses: sonarsource/sonarcloud-github-action@v1.6
       with:
         projectBaseDir: my-custom-directory
         args: >
