@@ -70,8 +70,9 @@ service type informations to access your demo app via a web browser.
 
     :mag: Enter http://localhost:8080 in a browser.
 
-### NodePort (only for GKE)
+### NodePort (only for GKE and minikube)
 **Note for `kind` users:** This service type would require a [dedicated `kind` configuration](https://kind.sigs.k8s.io/docs/user/configuration/#extra-port-mappings).
+
 **Note for `AKS` users:** In AKS, the node does not get a public IP address.
 
 1. Change the service type to *NodePort* with:
@@ -112,12 +113,14 @@ service type informations to access your demo app via a web browser.
 
     :mag: Enter the IP:port in a browser.
 
-    **Note for Gcloud:**
+    **Note for Google Cloud:**
     You need to create a firewall rule to allow TCP traffic on the node port using
     `gcloud compute firewall-rules create test-node-port --allow tcp:31425 --target-tags gke-keptn-grimmer-dev-6cb41d0c-node`
 
 ### LoadBalancer
 **Note for `kind` users:** This service type is not supported.
+
+**Note for `minikube` users:** A dedicated tunnel is needed (i.e. execute `minikube tunnel`).
 
 1. Change the service type to *LoadBalancer* with:
 
