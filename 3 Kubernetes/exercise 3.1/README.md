@@ -1,7 +1,7 @@
 # Exercise 3.1: Setup of a Kubernetes Cluster
 
 In this exercise, you will create your own Kubernetes cluster hosted on a public cloud provider. For the following exercises, you can either use the [Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine/) or the [Azure Kubernetes Service (AKS)](https://azure.microsoft.com/en-us/services/kubernetes-service/).
-In case you have no access to a public cloud (because e.g. you do not have a credit card, already used the free credits), you can also start a k8s cluster locally using [kind](https://kind.sigs.k8s.io/docs/user/quick-start/).
+In case you have no access to a public cloud (because e.g. you do not have a credit card, already used the free credits), you can also start a k8s cluster locally using [kind](https://kind.sigs.k8s.io/docs/user/quick-start/) or [minikube](https://minikube.sigs.k8s.io/docs/start/).
 
 
 ## Google Kubernetes Engine (GKE)
@@ -14,13 +14,6 @@ In case you have no access to a public cloud (because e.g. you do not have a cre
     Run the command: 
     ```console
     gcloud version
-    ```
-
-    ```source
-    Google Cloud SDK 272.0.0
-    bq 2.0.50
-    core 2019.11.16
-    gsutil 4.46
     ```
 
 ### Setup the Cluster
@@ -113,4 +106,21 @@ In case you have no access to a public cloud (because e.g. you do not have a cre
 
     ```console
     kubectl cluster-info --context kind-kind
+    ```
+
+## minikube
+
+"`minikube` minikube is local Kubernetes, focusing on making it easy to learn and develop for Kubernetes."
+
+### Starting a local Cluster 
+1. In your terminal, execute the following command:
+
+    ```console
+    minikube start
+    ```
+
+1. Print the cluster info by executing the following command:
+
+    ```console
+    kubectl cluster-info
     ```
