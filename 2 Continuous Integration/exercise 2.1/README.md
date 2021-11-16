@@ -29,42 +29,42 @@ In this exercise, you will set up a *Continuous Integration* (CI) workflow using
 
 1. Create file `CI.yml` in the folder `.github/workflows` of your repository and copy-paste the content from the provided `CI.yml` file. 
 
-    ```yaml
-    name: CI
+```yaml
+name: CI
 
-    # Controls when the workflow will run
-    on:
-    # Triggers the workflow on push or pull request events but only for the master branch
-    push:
-        branches: [ master ]
-    pull_request:
-        branches: [ master ]
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
-    # Allows you to run this workflow manually from the Actions tab
-    workflow_dispatch:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
-    # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-    jobs:
-    # This workflow contains a single job called "build"
-    build:
-        # The type of runner that the job will run on
-        runs-on: ubuntu-latest
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "continuous_integration"
+  continuous_integration:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
 
-        # Steps represent a sequence of tasks that will be executed as part of the job
-        steps:
-        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-        - uses: actions/checkout@v2
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-        # Runs a single command using the runners shell
-        - name: Run a one-line script
-            run: echo Start to test and build the artifact
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Start to test and build the artifact
 
-        # Runs a set of commands using the runners shell
-        - name: Run test and build
-            run: |
-            go test -v ./...
-            CGO_ENABLED=0 GOARCH=amd64 go build -o demo
-    ```
+      # Runs a set of commands using the runners shell
+      - name: Run test and build
+        run: |
+          go test -v ./...
+          CGO_ENABLED=0 GOARCH=amd64 go build -o demo
+```
 
 1. Trigger the GitHub Action build by a code change, e.g., change "Hello" to "Hi there" in the file `./main.go`
 
