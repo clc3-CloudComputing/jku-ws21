@@ -11,13 +11,13 @@ In this exercise, you will deploy a container in a Kubernetes cluster. Thus, a p
 1. In Kubernetes, the equivalent to `docker container run` is `kubectl run`. Use this command to run your container:
 
     ```console
-    kubectl run --generator=run-pod/v1 demo --image=agrimmer/demo:time --port=8888 --labels app=demo
+    kubectl apply -f pod.yaml
     ```
 
 1. To verify that the container started and the app is running, use:
     
     ```console
-    kubectl get pods --selector app=demo
+    kubectl get pods
     ```
 
 1. To forward your local port **9999** to the container port **8888**, use:
