@@ -15,6 +15,12 @@ In case you have no access to a public cloud (because e.g. you do not have a cre
     ```console
     gcloud version
     ```
+ 
+ 1. Run the `kubectl` installation command:
+
+    ```console
+    gcloud components install kubectl
+    ```
 
 ### Setup the Cluster
 1. In your terminal, execute the following command and follow the steps:
